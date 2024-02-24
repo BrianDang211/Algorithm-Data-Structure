@@ -3,6 +3,7 @@ const { validateParameters } = require("../../Utils/Validates");
 const { autogenerateArrNumber } = require("../../Utils/GenerateNumber");
 const { convertRepeatElementToArray } = require("../../Utils/Converter");
 const { writeFile } = require("../../Utils/WriteFile");
+const { combination } = require("./Combination");
 
 /**
  * Problem:
@@ -27,52 +28,80 @@ const { writeFile } = require("../../Utils/WriteFile");
  * 
  * TOTAL_COLLECT = n^k
  */
-
+  
 function generationBaseN(n,k) {
       validateParameters(n, k);
-      const arrNumber = autogenerateArrNumber(0, 1, n);
-      let results = [];
-      arrNumber.forEach(n => {
-            const arrSource = [n];
-            while(arrSource[arrSource.length - 1] <= arrNumber[arrNumber.length - 1]) {
-                  results = [...results, ...autoGeneratePrograming(k, arrSource)];
-                  arrSource.push(arrSource[arrSource.length-1] + 1);
-            };
-      });
+      let results = []; 
+      let i = 1;
+      while(i <= n && i <= k) {
+            const subCombinationOfN = combination(n, i, {
+                  startValue: 0,
+                  rangeStep: 1
+            });
+            // console.log("subCombinationOfN === ", subCombinationOfN);
+            subCombinationOfN.forEach(element => {
+                  const subResults = autoGeneratePrograming(k, element);
+                  console.log("=================================");
+                  console.log("Array Source ==== ", element);
+                  console.log("subResults ==== ", subResults);
+                  console.log("Check is equal: ", Math.pow(element.length, k) === (element?.length > 1 ? subResults.length + 2 : subResults.length));
+                  console.log("=================================");
+                  results = [...results, ...subResults];
+            })
+            i++;
+      }
       return results;
 }
 
 /**
- * 
+ *    
  * @param {*} k 
  * @param {*} arrSource // Integer Number Array Sorted
- * @returns 
+ * @returns  
  */
 function autoGeneratePrograming(k, arrSource) {
-      validateParameters(k, arrSource);
+      validateParameters(k, arrSource); 
+      if (arrSource.length > k) return [];   
       if (arrSource.length === 1) return [convertRepeatElementToArray(String(arrSource[0]), k)];
       if (arrSource.length === k) {
-            return permutation(-1, arrSource);
-      };
-      if (arrSource.length === 2) return binaryGeneratePrograming(k ,arrSource);
+            return permutation(-1, arrSource); 
+      }; 
+      if (arrSource.length === 2) return binaryGeneratePrograming(k ,arrSource); 
       let results = [];
-      // implement for case k > arrSource.length  
+      // implement for case k > arrSource.length
       arrSource.forEach((element, idx) => {      
-            const cloneArrSource = [...arrSource];
-            cloneArrSource.splice(idx, 1);
-            const subGenerateCollect = autoGeneratePrograming(k-1, cloneArrSource);
-            // merge subGenerateCollection to parent
-            if (subGenerateCollect?.length) {
-                  subGenerateCollect.forEach(subArr => results.push([element, ...subArr]));
-            };
-      });   
+            let count = 1;
+            while(count <= 2) {
+                  const cloneArrSource = [...arrSource];
+                 /**
+                  *  only splice cloneArrSource when loop in twice, because each number will 
+                  *  have cloneArrSource.length options, should first element for each generation
+                  *  still can duplicate for another porision.
+                  */
+                  if (count === 2) {
+                        cloneArrSource.splice(idx, 1); 
+                  } 
+                  const subGenerateCollect = autoGeneratePrograming(k-1, cloneArrSource);
+                  // merge subGenerateCollection to parent
+                  if (subGenerateCollect?.length) {
+                        subGenerateCollect.forEach(subArr => results.push([element, ...subArr]));
+                  }; 
+                  count++;
+            } 
+      });     
       return results;
 }
 
+/**
+ * Array Source is a number array was sorted
+ */
 function binaryGeneratePrograming(k, arrSource) {
       validateParameters(k, arrSource);
       if (arrSource?.length !== 2) {
             throw Error("Binary generation must be array source length is 2");
+      }
+      if (k === 1) {
+            return [[0],[1]];
       }
       // init results with MINIMUM config
       let results = [[...convertRepeatElementToArray(String(arrSource[0]), k-1), arrSource[1]]];
@@ -97,8 +126,9 @@ function binaryGeneratePrograming(k, arrSource) {
       return results;
 }
 
-const results = generationBaseN(3,2);
+// const results = generationBaseN(3,4);
 //log
-writeFile("GenerationBaseNOutput.txt", results);
-console.log("results === ", results);
-console.log("results === ", results.length);
+// writeFile("GenerationBaseNOutput.txt", results);
+// console.log("results === ", results);
+// console.log("results === ", results.length);
+module.exports = { generationBaseN, binaryGeneratePrograming , autoGeneratePrograming}

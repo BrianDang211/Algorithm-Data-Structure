@@ -13,11 +13,10 @@ function validateArraySource(arrSource) {
 
 function validateParameters(...params) {
       if (!params.length) return;
-      console.log("validateParameters params ==== ", params);
       params.forEach(p => {
             if (typeof p === "number") {
                   validateIntegerNumber(p);
-            }else if (Array.isArray(p)) {
+            } else if (Array.isArray(p)) {
                   validateIntegerNumber(p);
             }          
       })

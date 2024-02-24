@@ -1,5 +1,6 @@
 const { autogenerateArrNumber } = require("../../Utils/GenerateNumber");
-function combination(n , k) {
+const { validateParameters } = require("../../Utils/Validates");
+function combination(n , k, autoGenArrSourceConfig) {
       /**
        * Input:
        * n = 5, k = 3 (1 <= n <= 10^5, 1 <= k <= n)
@@ -26,33 +27,36 @@ function combination(n , k) {
        * + Int: 1 | 4 byte
        * + String: 1 byte
       */
-      if (n <= 0 || k <= 0 || k > n) return [];
-      const numArr = autogenerateArrNumber(1, 1, n); // n*4 (bytes)
+      validateParameters(n, k);
+      if (k > n) {
+            throw Error("Number k must be least or equal than n");
+      };
+      const { startValue = 1, rangeStep = 1 } = autoGenArrSourceConfig || {};
+      const numArr = autogenerateArrNumber(startValue, rangeStep, n); // n*4 (bytes)
       const results = []; // array => [[1,2,3], [1,2,4], [1,2,5], ...]
-  
       const FIRST_ELEMENT_MAX = numArr[n-k]; // 4 byte
       const MAX_VALUE = numArr[numArr.length - 1]; // 4 byte
 
       let lastConfig = results[results.length - 1] ?? [];
       let nextGenerateControl = false; // 1/8 byte
 
-      while (!lastConfig[0] || Number(lastConfig[0]) < FIRST_ELEMENT_MAX) {
+      while (lastConfig[0] === undefined || Number(lastConfig[0]) < FIRST_ELEMENT_MAX) {
             // generate start_element of each generation
             if (!results?.length) {
-                  results.push(autogenerateArrNumber(1, 1, k));
+                  results.push(autogenerateArrNumber(startValue, rangeStep, k));
             } else if (nextGenerateControl) {
-                  results.push(autogenerateArrNumber(lastConfig[0] + 1, 1, k));
+                  results.push(autogenerateArrNumber(lastConfig[0] + 1, rangeStep, k));
                   // reset next generate control
                   nextGenerateControl = false;
             } else {
-                  for (let i = lastConfig.length - 1; i > 0; i--) {
+                  for (let i = lastConfig.length - 1; i >= 0; i--) {
                         if (lastConfig[i] < MAX_VALUE) {
                               if (lastConfig[i] + 1 === lastConfig[i+1]) {
                                     nextGenerateControl = true;
                               } else {
                                     let nextConfig = [...lastConfig.slice(0, i), lastConfig[i] + 1];
                                     if (nextConfig.length < k) {
-                                          const restOfNextConfig = autogenerateArrNumber(nextConfig[nextConfig.length-1] + 1, 1, k-nextConfig.length); 
+                                          const restOfNextConfig = autogenerateArrNumber(nextConfig[nextConfig.length-1] + 1, rangeStep, k-nextConfig.length); 
                                           nextConfig = [...nextConfig, ...restOfNextConfig];
                                     }
                                     results.push(nextConfig);
@@ -66,11 +70,11 @@ function combination(n , k) {
       return results;
 }
 
-const results1 = combination(10,5);
+// const results1 = combination(4,3, {startValue: 0,rangeStep: 1});
 // const results2 = solution(5,3);
 // const results3 = solution(5,4);
 
-console.log(results1);
+// console.log(results1);
 // console.log(results2);
 // console.log(results3);
 
