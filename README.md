@@ -1,4 +1,4 @@
-# Algorithm-Data-
+# Algorithm-Data And Data Structure
 
 This is repos public some data-structure with Problem & solutions
 
