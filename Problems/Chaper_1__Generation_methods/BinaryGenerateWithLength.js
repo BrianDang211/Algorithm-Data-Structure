@@ -24,13 +24,16 @@
  * We will allocate sequent "01" at position another: begin | middle | end
  * ...begin | [01] | ...middle | [01] | ...end
  *  
- * Replace [01] => begin
- * Replace [01] => middle
- * Replace [01] => end
+ * We need excute algo for 7 cases likes this:
  * 
- * Replace [01] => {begin, middle}
- * Replace [01] => {begin, end}
- * Replace [01] => {middle, end}
+ * Case 1: Replace [01] => begin
+ * Case 2: Replace [01] => middle
+ * Case 3: Replace [01] => end
+ * 
+ * Case 4: Replace [01] => {begin, middle}
+ * Case 5: Replace [01] => {begin, end}
+ * Case 6: Replace [01] => {middle, end}
+ * Case 7: Replace [01] => {begin, middle, end}
  * 
  * 
  * @param {*} position 
@@ -38,7 +41,7 @@
 
 const { validateParameters } = require("../../Utils/Validates");
 const { writeFile } = require("../../Utils/WriteFile");
-const { binaryGeneratePrograming } = require("./GenerationBaseN");
+const { binaryGeneratePrograming, generationBaseN } = require("./GenerationBaseN");
 
 const POSITION = {
       BEGIN: "begin",
@@ -99,6 +102,28 @@ function generateWithPosition(position, nRestPositionToAllocate) {
             case POSITION.BEGIN_END: 
             case POSITION.MIDDLE_END: 
                   return mixedGenerate(position, nRestPositionToAllocate);
+            case POSITION.BEGIN_MIDDLE_END:
+                  const combinationOfRestPositions = generationBaseN(nRestPositionToAllocate, 3, {startValue: 1, rangeStep: 1});
+                  if (combinationOfRestPositions?.length) {
+                        // from combination filter 
+                        return combinationOfRestPositions
+                                    .filter(arrC => arrC.reduce((total, cur) => total + cur,0) === nRestPositionToAllocate)
+                                    .reduce((memo, arrCC) => {
+                                          const allConbinationAtBeginPosition = binaryGeneratePrograming(arrCC[0], BINARY_ARRAY);
+                                          const allConbinationAtMiddlePosition = binaryGeneratePrograming(arrCC[1], BINARY_ARRAY);
+                                          const allConbinationAtEndPosition = binaryGeneratePrograming(arrCC[2], BINARY_ARRAY);
+                                          return [
+                                                ...memo,
+                                                ...filterResultFromBinaryGenerate(allConbinationAtBeginPosition).reduce((memo, ee) => {
+                                                      return [
+                                                            ...memo, 
+                                                            ...filterResultFromBinaryGenerate(allConbinationAtMiddlePosition)
+                                                            .map(eee => resultBuilder(position, ee, eee))
+                                                      ];
+                                                },[])
+                                          ]
+                                    },[])
+                  }
             default:
                   throw Error(`Position parameter value: ${position} is invalid!`);
       }

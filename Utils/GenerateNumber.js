@@ -1,8 +1,10 @@
-function autogenerateArrNumber(startValue, rangeStep, length) {
-      if (startValue < 0 || rangeStep < 0 || length < 0) return [];
+const { validateParameters } = require("./Validates");
+
+function autogenerateArrNumber(startValue, rangeStep, size) {
+      validateParameters(startValue, rangeStep, size);
       const results = [startValue];
       let iControl = 1;
-      while(iControl <= length-1) {
+      while(iControl <= size-1) {
             results[iControl] = results[iControl - 1] + rangeStep;
             ++iControl;
       }

@@ -43,6 +43,7 @@ function permutation(n, arrSource) {
       if (n === 1) return arrSource?.length ? arrSource : (results.push(1) && results);
       const arrNumber = arrSource?.length ? arrSource : autogenerateArrNumber(1, 1, n); // t = O(n) // s = n*4 (Byte) 
       // O(n*(n-1)*(n-2)*...2.1) = O(n!)
+      // O(n*(n-1)*(n-2)*...2.1) = O(n!)
       // S = n*n*4 + n!*4*4
       for (let i = 0; i < arrNumber.length; i++) {
             const cloneArrNumber = [...arrNumber]; // s1 = n*4 (Byte)
@@ -69,9 +70,9 @@ function getAllCollectOfCurrentGeneration(startNumberOfGeneration, restArrNumber
       return result; 
 }
 
-// const result = permutation(5);
+const result = permutation(5);
 
-// console.log("length === , result === ",result.length, result);
+console.log("length === , result === ",result.length, result);
 
 module.exports = { permutation };
 

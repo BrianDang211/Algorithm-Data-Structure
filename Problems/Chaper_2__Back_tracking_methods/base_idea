@@ -1,0 +1,23 @@
+1) Understand about recursive programming:
++ Call Stack
++ Call Memory Stack
+2) Analytic input
+3) Find rule: 
+Common Thinking:
+Elements => x[1]
+            => From x[1]
+                  => Elements => x[2]
+                        => From x[2]
+                              => Elements => x[3]
+                              ....
+                                    => From x[n]
+                                          => Elements => x[n]
+                                                ....
+                                                      => From x[n-k]
+                                                            => Elements => x[n-k]
+                                                                  => From x[1]
+                                                                        => Elements x[1]  \\ result back-tracking from before step
+4) In rule from step 3, write code to implement rule from step 3 (use recursive programming)
+5) Design Test case matrix to test for step 4
+6) Re-check step 4 and fix bug
+

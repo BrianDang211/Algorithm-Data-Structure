@@ -29,25 +29,22 @@ const { combination } = require("./Combination");
  * TOTAL_COLLECT = n^k
  */
   
-function generationBaseN(n,k) {
+function generationBaseN(n,k,arrayAutogenConfig={startValue: 0, rangeStep: 1}) {
       validateParameters(n, k);
-      let results = []; 
+      let results = [];
       let i = 1;
       while(i <= n && i <= k) {
-            const subCombinationOfN = combination(n, i, {
-                  startValue: 0,
-                  rangeStep: 1
-            });
+            const subCombinationOfN = combination(n, i, arrayAutogenConfig);
             // console.log("subCombinationOfN === ", subCombinationOfN);
             subCombinationOfN.forEach(element => {
                   const subResults = autoGeneratePrograming(k, element);
-                  console.log("=================================");
-                  console.log("Array Source ==== ", element);
-                  console.log("subResults ==== ", subResults);
-                  console.log("Check is equal: ", Math.pow(element.length, k) === (element?.length > 1 ? subResults.length + 2 : subResults.length));
-                  console.log("=================================");
+                  // console.log("=================================");
+                  // console.log("Array Source ==== ", element);
+                  // console.log("subResults ==== ", subResults);
+                  // console.log("Check is equal: ", Math.pow(element.length, k) === (element?.length > 1 ? subResults.length + 2 : subResults.length));
+                  // console.log("=================================");
                   results = [...results, ...subResults];
-            })
+            });
             i++;
       }
       return results;
@@ -75,7 +72,7 @@ function autoGeneratePrograming(k, arrSource) {
                   const cloneArrSource = [...arrSource];
                  /**
                   *  only splice cloneArrSource when loop in twice, because each number will 
-                  *  have cloneArrSource.length options, should first element for each generation
+                  *  have cloneArrSource.length options, should first element for each generation 
                   *  still can duplicate for another porision.
                   */
                   if (count === 2) {
@@ -126,9 +123,9 @@ function binaryGeneratePrograming(k, arrSource) {
       return results;
 }
 
-// const results = generationBaseN(3,4);
+const results = generationBaseN(3,4);
 //log
 // writeFile("GenerationBaseNOutput.txt", results);
-// console.log("results === ", results);
+console.log("results === ", results);
 // console.log("results === ", results.length);
 module.exports = { generationBaseN, binaryGeneratePrograming , autoGeneratePrograming}

@@ -1,6 +1,6 @@
-function validateIntegerNumber(n) {
+function validateIntegerPositiveNumber(n) {
       // valid for number parameter
-      if (n < 0 || n > Math.pow(10,5)) {  
+      if (n < 0 || n > Math.pow(10,5) || !Number.isInteger(n)) {  
             throw Error("Number type must be greater than 0 and less than 10^5.");
       }
 }
@@ -15,11 +15,11 @@ function validateParameters(...params) {
       if (!params.length) return;
       params.forEach(p => {
             if (typeof p === "number") {
-                  validateIntegerNumber(p);
+                  validateIntegerPositiveNumber(p);
             } else if (Array.isArray(p)) {
-                  validateIntegerNumber(p);
+                  validateIntegerPositiveNumber(p);
             }          
       })
 }
 
-module.exports = { validateParameters, validateIntegerNumber, validateArraySource };
+module.exports = { validateParameters, validateIntegerPositiveNumber, validateArraySource };
