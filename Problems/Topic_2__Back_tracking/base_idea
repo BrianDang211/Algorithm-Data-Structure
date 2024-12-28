@@ -1,0 +1,23 @@
+1) Understand about recursive programming:
++ Call Stack
++ Call Memory Stack
+2) Analystic input
+3) Find rule: 
+Common Thinking:
+Elements => x[1]
+            => From x[1]
+                  => Find all elements for x[2]
+                        => From x[2]
+                              => Find all elements => x[3]
+                              ....
+                                    => From x[n]
+                                          => find all elements => x[n+1]
+                                                ....
+                                                      => From x[n+i]
+                                                            => find all elements => x[n+i-1]
+                                                                  => From x[n+i-1]
+                                                                        => find all elements x[n]  \\ result back-tracking from before step
+==> Merge results to x[i-1] from x[i] (i=1...n)
+4) In rule from step 3, write code to implement rule from step 3 (use recursive programming)
+5) Design Test case matrix to test for step 4
+6) Re-check step 4 and fix bug
