@@ -26,7 +26,7 @@ const testCases = [
                   [1,3,2],
                   [1,4,1],
                   [2,3,1],
-                  [2,4,2],
+                  [2,4,8],
                   [3,4,4]
             ]
       },
@@ -39,7 +39,7 @@ const testCases = [
                   [1,3,2],
                   [1,4,1],
                   [2,3,1],
-                  [2,4,2],
+                  [2,4,8],
                   [3,4,4]
             ]
       },
@@ -49,8 +49,6 @@ function main(m,n,matrixWeight) {
       console.log("m ==== ", m);
       console.log("n ====", n);
       console.log("matrix weight ==== ", matrixWeight);
-
-      let bestCostAccumulate=0;
 
       function getCostForEachMove(fromCityId,toCityId) {
             if (m != matrixWeight.length) {
@@ -94,6 +92,8 @@ function main(m,n,matrixWeight) {
                   return [[[fromCityId,1,getCostForEachMove(fromCityId, 1)]]];
             };
             const allPaths = [];
+            let bestCostAccumulate=0;
+
             for(let i=0; i<toCities.length; i++) {
                   const toCity = toCities[i];
                   const costToMove = getCostForEachMove(fromCityId, toCity.id);
@@ -101,7 +101,12 @@ function main(m,n,matrixWeight) {
                   if (!costToMove || (bestCostAccumulate>0 && costToMove > bestCostAccumulate)) continue;
                   const subPaths = tourism(toCity.id);
                   const mergeSubPath = subPaths.map(sp => {
-                        return [[fromCityId,toCity.id,costToMove], ...sp];
+                        const fullPath = [[fromCityId,toCity.id,costToMove], ...sp];
+                        // calculate cost for each travel
+                        bestCostAccumulate = fullPath.reduce((costAccumulate, subPath) => {
+                              return costAccumulate+=subPath[2];
+                        },0);
+                        return fullPath;
                   });
                   allPaths.push(...mergeSubPath);
                   if (toCities.length >= 2) {
@@ -149,6 +154,7 @@ function main(m,n,matrixWeight) {
 
       function getBestPath() {
             const allPaths = tourism();
+            console.log("allPaths === ", allPaths);
             if (allPaths.length === 0) return;
             if (allPaths.length === 1) return {
                   bestPath: allPaths[0],
@@ -194,7 +200,8 @@ function main(m,n,matrixWeight) {
             return {id: i, visited: false};
       });
 
-      getBestPath();
+      const bestPaths = getBestPath();
+      console.log("Best paths ==== ", bestPaths);
 };
 
 function runTest() {

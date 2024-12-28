@@ -2,4 +2,4 @@
 
 This is repos public some data-structure with Problem & solutions
 
-- Leetcode Problems and solution for its.
+- Leetcode, hackerRank Problems and solution for its.
