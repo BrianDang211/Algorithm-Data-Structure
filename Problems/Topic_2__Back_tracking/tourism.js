@@ -50,6 +50,8 @@ function main(m,n,matrixWeight) {
       console.log("n ====", n);
       console.log("matrix weight ==== ", matrixWeight);
 
+      let bestCost = 0;
+
       function getCostForEachMove(fromCityId,toCityId) {
             if (m != matrixWeight.length) {
                   throw new Error("The row of matrix weight must be equal with value of m variable.");

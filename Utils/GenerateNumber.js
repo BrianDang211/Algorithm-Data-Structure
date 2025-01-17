@@ -7,8 +7,8 @@ function autogenerateArrNumber(startValue, rangeStep, size) {
       while(iControl <= size-1) {
             results[iControl] = results[iControl - 1] + rangeStep;
             ++iControl;
-      }
+      };
       return results;
-}
+};
 
 module.exports = { autogenerateArrNumber }
