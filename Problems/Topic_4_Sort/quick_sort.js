@@ -32,16 +32,14 @@
  * // some programming to re-order rest elements 
  * 
  * When is we stop?
- * Let's me think sometime
- * 
+ * Let's me thinking sometime
+ *  
  * 
  * 
  * 
  * 
  */
-function quickSort(arr) {
+function quickSort(arr) {p
       if(!arr.length) return;
-      
-      
       console.log("Array after run: ", arr);
 };    

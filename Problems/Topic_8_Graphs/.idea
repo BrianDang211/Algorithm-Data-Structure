@@ -1,0 +1,105 @@
+We have some concept about graph.
+1) What is the graph?
+The graph is a data structure which include two elements:
+- The first element, it calls vertice
+- The second element, it calls edge
+We have short-write a graph:
+      G=(V,E)
++ V: Vertices
++ E: Edges
+
+From here we have question, How many type of the graph?
+
+We have two group:
+The first group: 
+*** Single graph:
+- From vertice u to vertice v exist greatest one edge (undirect or direct)
+
+*** Multi graph:
+- It means between vertice u and vertice v exist least one edges.
+
+*** Undirect graph:
+- Edge connect vertice u and vertice v is undirect
+
+*** Direct graph:
+- Edge connect vertice u and vertice v is direct
+
+Please disscuss about type of edge:
+One edge:
+1) undirect Edge
+2) direct Edge
+Inside each edge, it has weight of it
+
+
+The second group: Multi graph
+
+*** Vertice: 
+For undirect graph:
+- Vertice Adjacent: Between two vertices exist a edge to connect vertice u to vertice v.
+      (u,v) is vertice adjacent if and only if exist a edge (direct or undirect edge) connect them.
+      this edge calls e
+And edge e is call incident with vertice u and vertice v.
+- Degree of a vertice:
+What is the degree of a vertice?
+So the degree of a vertice is number of vertice adjacent with it.
+
+For direct graph:
+- Out degree: It means number of out edge 
+
+- In degree: It means number of in edge
+
+*** isomorphic:
+G=(V,E)
+G'=(V',E')
+
+Exist 
+
+*** Connected Graph: (relate to undirect graph)
+Every (u,v) => always exist least one path from u to v
+
+*** Strong Connected Graph: (relate to direct graph) 
+Every (u,v) => always exist least one path from u to v, and v to u
+
+*** Weekly connected graph: (relate to direct graph):
+- if the undirect version of it is the connected graph
+
+*** Complete Graph:
+- Indirect graph
+- Every vertice pair is adjacent
+
+*** Bipartite Graph (Đồ thị 2 phía):
+- Indirect Graph
+- The vertice separated to two collections, we can call it X,Y
+
+X=(x1,x2,x3,x4,...,xn)
+Y=(y1,y2,y3,y4,...,yn)
+
+only exist edge from x -> y or y -> x
+
+*** Hyper Graph:
+- Indrect graph
+
+How to the simulation a graph?
+
+- Matrix (two dimentions)
+
+- Array (one dimention)
+(u,v) -> (u1,v1) -> (u2, v2) -> ... -> (u[n], v[n])
+(The length of array dependece by edges)
+
+- Linked list
++ (u,v) -> (u1,v1) -> (u2,v2) -> ... -> (u[n], v[n])
+
+*** Issue:
+When we want to check all adjacency an vertice, we must interator all item in array or linked list and check if exist vertice.
+
+v1, v2, v3, ..., vn
+Heads -> memories start of each vertices
+
+Array
+1 -> [1,2,3]
+2 -> [3,4,5]
+3 -> [5,6,7]
+
+Lisked list:
+node_1 -> {node_2, node_3}
