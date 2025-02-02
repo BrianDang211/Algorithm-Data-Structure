@@ -131,3 +131,20 @@
 This is repos public some data-structure with Problem & solutions
 
 - Leetcode, hackerRank Problems and solution for its.
+
+*** Some extensions:
+I. Pretier Formatter extension
+1) Prettier Formatter for formatter 
+2) How to config it?
+- on Extension on vs code find for Prettier Formater
+- add .prettierrc config file at root project
+3) At your programming file, use short-hand to format your code:
+```
+      ctrl + shift + f
+```
+II) Winston node module
+```
+npm install winston
+```
+
+

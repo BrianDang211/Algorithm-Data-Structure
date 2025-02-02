@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "stack-trace": "^1.0.0-pre2",
+    "winston": "^3.17.0"
+  }
+}
