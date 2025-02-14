@@ -162,7 +162,7 @@ class DFS {
             this.handleVerticeNotFoundException(fromVertice);
             this.visited[fromVertice] = true;
             // find all adjacents of u
-            //this.debug();
+            // this.debug();
             for (let j = 1; j <= this.nVertice; j++) {
                   if (
                         this.visited[j] !== true &&

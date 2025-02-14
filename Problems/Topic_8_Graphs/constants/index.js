@@ -8,4 +8,10 @@ const GRAPH_DATA_STATUS = {
       INCODE: "in-code"
 }
 
-module.exports = { GRAPH_TYPE, GRAPH_DATA_STATUS }
+const GRAPH_DATA_STRUCTURE_TYPE = {
+      ARRAY_ONE_DIMENTION: "array_one_dimention",
+      ARRAY_TWO_DIMENTIONS: "array_two_dimention",
+      LINKED_LIST: "linked_list",
+}
+
+module.exports = { GRAPH_TYPE, GRAPH_DATA_STATUS, GRAPH_DATA_STRUCTURE_TYPE }

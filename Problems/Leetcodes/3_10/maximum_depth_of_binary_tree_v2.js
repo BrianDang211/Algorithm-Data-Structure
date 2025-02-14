@@ -36,6 +36,6 @@ var maxDepth = function(root) {
       const maxDepthOfLeftTree = 1 + maxDepth(root?.left);
       const maxDepthOfRightTree = 1 + maxDepth(root?.right);
       return maxDepthOfLeftTree > maxDepthOfRightTree ? maxDepthOfLeftTree : maxDepthOfRightTree;
-  };
+};
 
 console.log(maxDepth(tree));

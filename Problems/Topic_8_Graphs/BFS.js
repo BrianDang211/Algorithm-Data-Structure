@@ -54,8 +54,8 @@ class BFS {
                         this.fromVertice = v;
                         isExisted = true;
                         break;
-                  }
-            }
+                  };
+            };
             return isExisted;
       }
 
@@ -94,7 +94,7 @@ class BFS {
       bfs(fromVertice) {
             this.handleVerticeNotFoundException(fromVertice);
             this.visited[fromVertice] = true;
-            // find all adjacents of u
+            // find all adjacents of u8
             for (let j = 1; j <= this.nVertice; j++) {
                   if (
                         this.visited[j] !== true &&

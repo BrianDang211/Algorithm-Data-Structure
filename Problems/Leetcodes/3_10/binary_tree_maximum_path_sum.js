@@ -1,4 +1,5 @@
 /**
+ * Link problem: https://leetcode.com/problems/binary-tree-maximum-path-sum/description/?envType=study-plan-v2&envId=top-interview-150
  * Definition for a binary tree node.
  * function TreeNode(val, left, right) {
  *     this.val = (val===undefined ? 0 : val)
@@ -9,7 +10,7 @@
 /**
  * @param {TreeNode} root
  * @return {number}
- */  
-var maxDepth = function(root) {
+ */
+var maxPathSum = function(root) {
     
 };

@@ -34,7 +34,7 @@
  * + Binary Tree
  *  ++ Complete Tree (At layers less than h-1, the number childs of nodes are two)
  *  ++ Full Tree (At layers less than or equal h-1, the number childs of node are two)
- * 
+ *  (The h is depth of tree)
  * *** General tree:
  * => Tree calls k-tree (with k is max number of child of any parent)
  * 
