@@ -52,7 +52,14 @@ class Dfs {
 }
 
 class Tree {
+      travelse_type={
+            PRE_ORDER: "pre_order",
+            IN_ORDER: "in_order",
+            POST_ORDER: "post_order"
+      }
       tree = null;
+      drawTreeOuputFormat="";
+
       constructor() {}
 
       setTreeArray(treeInArray) {
@@ -71,6 +78,39 @@ class Tree {
                   root.right = this.buildTree(2 * rootIdx + 1);
             }
             return root;
+      }
+
+      checkNodeAsALeaf(node) {
+            if (!node) return false;
+            return (
+                  (node.left === null || node.left === undefined) &&
+                  (node.right === null || node.right === undefined)
+            );
+      }
+
+      drawTree(type) {
+            switch(type) {
+                  case this.travelse_type.PRE_ORDER: 
+                        this.travelseWithPreOrder(this.tree);
+                  case this.travelse_type.IN_ORDER:
+                        this.travelseWithInOrder(this.tree);
+                  case this.travelse_type.POST_ORDER:
+                        this.travelseWithPostOrder(this.tree);
+                  default:
+                        console.log("The travelse type isn't found, check again...");
+            }
+      }
+
+      travelseWithPreOrder(root) {
+            
+      }
+
+      travelseWithInOrder(root) {
+            
+      }
+
+      travelseWithPostOrder(root) {
+
       }
 }
 

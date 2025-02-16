@@ -13,10 +13,5 @@
  */
 class Euler {
 
-      
-
-      hasEulerCircuit() {
-
-      }
 }
 
