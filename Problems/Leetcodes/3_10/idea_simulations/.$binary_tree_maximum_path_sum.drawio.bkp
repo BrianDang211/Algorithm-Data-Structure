@@ -1,0 +1,99 @@
+<mxfile host="Electron" modified="2025-02-20T07:52:52.090Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.1.0 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="axWH-R3xFr33IdEG8HSF" version="24.1.0" type="device">
+  <diagram name="Page-1" id="SE0Pd3vN2Rl-mlT4ESwE">
+    <mxGraphModel dx="1750" dy="1035" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="EpWR1OXKD7VipOkhY7ma-1" value="Input ?&amp;nbsp;&lt;div&gt;nums = [2,3,1,1,4]&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="80" y="300" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="AcnD3me5N9nuMHDNny-Z-1" value="" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="EpWR1OXKD7VipOkhY7ma-1" target="AcnD3me5N9nuMHDNny-Z-2">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="400" y="350" as="sourcePoint" />
+            <mxPoint x="440" y="330" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="AcnD3me5N9nuMHDNny-Z-2" value="Output?&lt;div&gt;True | False&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="550" y="300" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="AcnD3me5N9nuMHDNny-Z-3" value="- From an array include integer number,&lt;div&gt;we must check this input can jump with rule:&lt;/div&gt;&lt;div&gt;+ Each element in array input is number of step for our game (we called it is jump game)&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="260" y="190" width="230" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="AcnD3me5N9nuMHDNny-Z-7" value="2" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;strokeWidth=2;fontFamily=Tahoma;spacingBottom=4;spacingRight=2;strokeColor=#d3d3d3;" vertex="1" parent="1">
+          <mxGeometry x="160" y="540" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="AcnD3me5N9nuMHDNny-Z-8" value="3" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;strokeWidth=2;fontFamily=Tahoma;spacingBottom=4;spacingRight=2;strokeColor=#d3d3d3;" vertex="1" parent="1">
+          <mxGeometry x="280" y="540" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="AcnD3me5N9nuMHDNny-Z-9" value="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;strokeWidth=2;fontFamily=Tahoma;spacingBottom=4;spacingRight=2;strokeColor=#d3d3d3;" vertex="1" parent="1">
+          <mxGeometry x="405" y="540" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="AcnD3me5N9nuMHDNny-Z-10" value="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;strokeWidth=2;fontFamily=Tahoma;spacingBottom=4;spacingRight=2;strokeColor=#d3d3d3;" vertex="1" parent="1">
+          <mxGeometry x="520" y="540" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="AcnD3me5N9nuMHDNny-Z-11" value="4" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;strokeWidth=2;fontFamily=Tahoma;spacingBottom=4;spacingRight=2;strokeColor=#d3d3d3;" vertex="1" parent="1">
+          <mxGeometry x="640" y="540" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="AcnD3me5N9nuMHDNny-Z-12" value="" style="endArrow=none;dashed=1;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="140" y="559" as="sourcePoint" />
+            <mxPoint x="690" y="559" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="AcnD3me5N9nuMHDNny-Z-13" value="We suppose that:&lt;br&gt;- basically case: if every element inside input array is not equal 0, so we return true." style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="550" y="440" width="310" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="AcnD3me5N9nuMHDNny-Z-14" value="The difference case: In our input array we have some elements have number of step is 0&lt;div&gt;This is my solution for it:&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Overreral My Idea: I will seperate this input array to multiple segment array, each segment must has &lt;font color=&quot;#ff8000&quot;&gt;start_pos &lt;/font&gt;and &lt;font color=&quot;#ff8000&quot;&gt;neo_pos &lt;/font&gt;(So inside each segment will have least element which has number of step is 0)&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;1) Step 1: We must find the neo position (The neo position that has number of step is 0):&lt;/div&gt;&lt;div&gt;- start_pos&lt;/div&gt;&lt;div&gt;- neo_pos&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;2) Step 2: We can use start_pos and neo_pos from step 1 to fine the maximum number of step in range [start_pos, neo_pos]&lt;/div&gt;&lt;div&gt;- Some logics:&lt;br&gt;+ if max_number_step &amp;gt;= number_position =&amp;gt; return true&lt;/div&gt;&lt;div&gt;+ if max_number_step&amp;nbsp; &amp;lt;&amp;nbsp; neo_po&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="720" y="590" width="660" height="450" as="geometry" />
+        </mxCell>
+        <mxCell id="AcnD3me5N9nuMHDNny-Z-15" value="2" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;strokeWidth=2;fontFamily=Tahoma;spacingBottom=4;spacingRight=2;strokeColor=#d3d3d3;" vertex="1" parent="1">
+          <mxGeometry x="160" y="740" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="AcnD3me5N9nuMHDNny-Z-16" value="0" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;strokeWidth=2;fontFamily=Tahoma;spacingBottom=4;spacingRight=2;strokeColor=#d3d3d3;" vertex="1" parent="1">
+          <mxGeometry x="280" y="740" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="AcnD3me5N9nuMHDNny-Z-17" value="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;strokeWidth=2;fontFamily=Tahoma;spacingBottom=4;spacingRight=2;strokeColor=#d3d3d3;" vertex="1" parent="1">
+          <mxGeometry x="405" y="740" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="AcnD3me5N9nuMHDNny-Z-18" value="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;strokeWidth=2;fontFamily=Tahoma;spacingBottom=4;spacingRight=2;strokeColor=#d3d3d3;" vertex="1" parent="1">
+          <mxGeometry x="520" y="740" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="AcnD3me5N9nuMHDNny-Z-19" value="4" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;strokeWidth=2;fontFamily=Tahoma;spacingBottom=4;spacingRight=2;strokeColor=#d3d3d3;" vertex="1" parent="1">
+          <mxGeometry x="640" y="740" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="AcnD3me5N9nuMHDNny-Z-20" value="" style="endArrow=none;dashed=1;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="140" y="759" as="sourcePoint" />
+            <mxPoint x="690" y="759" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="AcnD3me5N9nuMHDNny-Z-21" value="" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="AcnD3me5N9nuMHDNny-Z-7" target="AcnD3me5N9nuMHDNny-Z-11">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="450" y="580" as="sourcePoint" />
+            <mxPoint x="500" y="530" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="AcnD3me5N9nuMHDNny-Z-22" value="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="AcnD3me5N9nuMHDNny-Z-21">
+          <mxGeometry x="-0.8313" y="1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="AcnD3me5N9nuMHDNny-Z-23" value="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="AcnD3me5N9nuMHDNny-Z-21">
+          <mxGeometry x="-0.2574" y="1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="AcnD3me5N9nuMHDNny-Z-24" value="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="AcnD3me5N9nuMHDNny-Z-21">
+          <mxGeometry x="0.2687" y="-2" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="AcnD3me5N9nuMHDNny-Z-25" value="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="AcnD3me5N9nuMHDNny-Z-21">
+          <mxGeometry x="0.7122" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

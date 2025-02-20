@@ -2,6 +2,7 @@ function TreeNode(val, left, right) {
       this.val = val === undefined ? 0 : val;
       this.left = left === undefined ? null : left;
       this.right = right === undefined ? null : right;
+      this.next = null;
 }
 
 class Dfs {
@@ -88,33 +89,97 @@ class Tree {
             );
       }
 
+      /**
+       *  With format:
+       *                1
+       *               / \
+       *              2   3
+       *             / \   \
+       *            4   5   7   
+       * Rules:
+       * - The gap between two edges is one space
+       * - The gap between two childs is three spaces    
+       * 
+       */
       drawTree(type) {
             switch(type) {
                   case this.travelse_type.PRE_ORDER: 
                         this.travelseWithPreOrder(this.tree);
+                        break;
                   case this.travelse_type.IN_ORDER:
                         this.travelseWithInOrder(this.tree);
+                        break;
                   case this.travelse_type.POST_ORDER:
                         this.travelseWithPostOrder(this.tree);
+                        break;
                   default:
                         console.log("The travelse type isn't found, check again...");
             }
       }
 
       travelseWithPreOrder(root) {
-            
+            if (root) {
+                  if (root?.val !== undefined) {
+                        console.log(root.val);
+                  }
+                  this.travelseWithPreOrder(root.left);
+                  this.travelseWithPreOrder(root.right);
+            }
       }
 
       travelseWithInOrder(root) {
-            
+            if (root) {
+                  this.travelseWithInOrder(root.left);
+                  if (root.val !== undefined) {
+                        console.log(root.val);
+                  }
+                  this.travelseWithInOrder(root.right);
+            }
       }
 
       travelseWithPostOrder(root) {
+            if (root) {
+                  this.travelseWithPostOrder(root.left);
+                  this.travelseWithPostOrder(root.right);
+                  if (root?.val !== undefined) {
+                        console.log(root.val);
+                  }
+            }
+      }
 
+      draw(root) {
+            if (!root) return "";
+            if (root?.val !== undefined) {
+                  console.log(root.val===null ? "null" : root.val);
+            }
+            if (root?.left !== undefined) {
+                  console.log("/   ");
+                  this.draw(root.left);
+            } 
+            if (root?.right !== undefined) {
+                  console.log("\\");
+                  this.draw(root.right);
+            }
       }
 }
 
 const tree = new Tree();
+
+tree.setTreeArray([1,2,3,4,5,null,7]);
+
+// tree.drawTree(tree.travelse_type.PRE_ORDER);
+
+// tree.draw(tree.tree);
+
+console.log(
+      `
+            1
+           / \\
+          2   3
+         / \\   \\
+        4   5   7
+      `
+);
 
 const dfsInstance = new Dfs(null);
 

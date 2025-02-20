@@ -29,10 +29,6 @@ var removeDuplicates = function(nums) {
           k+=2;
           continue;
         };
-        // if (nums[i] === nums[i+1]) {
-        //   k+=2;
-        //   i+2;
-        // };
         if (nums[i] != nums[k]) {
           nums[k] = nums[i];
         };

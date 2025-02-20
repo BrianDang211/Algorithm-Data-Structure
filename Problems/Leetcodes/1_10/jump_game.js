@@ -25,15 +25,6 @@ var canJump = function(nums) {
       if (nums[0]===0) return false;
       nums1=nums;
       console.log("nums: ", nums);
-      /**
-      * The idea for this case:
-      * That mean case has O element put in any position in nums array
-      * And separate our nums array to multiple segments, with each segment it seems
-      * as a sub-array from an sub-array include elements decreasing to 0 nearleast.
-      * After we start jump from the first element (with jump step is the maximum value of this element)
-      * if we can jump over 0 index, that mean we can jump continue.
-      * 
-      */
       let startIdxOfSegmentArray = 0;
       let neoIdxOfSegmentArray = findPositionOfNeo(startIdxOfSegmentArray,nums);
       while(startIdxOfSegmentArray <= neoIdxOfSegmentArray) {
