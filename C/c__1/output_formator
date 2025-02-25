@@ -1,0 +1,12 @@
+- In C we can use a standard library for print output:
+- It called stdio.h
+- printf(args)
+      args:
+            - s1: output_formatter
+                  + %[number_of_digit_wide]d
+                  + %[number_of_digit_wide].[number_of_fraction_digit_after_decimal_point]f
+                  + %o (for octal number)
+                  + %x (for hexadecimal number)
+                  + %c (for character)
+                  + %s (for character string)
+                  + %% (for itself)

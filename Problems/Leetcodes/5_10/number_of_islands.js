@@ -39,44 +39,12 @@
  *
  */
 
-let grid = [
-      ['1', '1', '1', '1', '0'],
-      ['1', '1', '0', '1', '0'],
-      ['1', '1', '0', '0', '0'],
-      ['0', '0', '0', '0', '0'],
-];
-
-// const grid = [
+// let grid = [
+//       ['1', '1', '1', '1', '0'],
+//       ['1', '1', '0', '1', '0'],
 //       ['1', '1', '0', '0', '0'],
-//       ['1', '1', '0', '0', '0'],
-//       ['0', '0', '1', '0', '0'],
-//       ['0', '0', '0', '1', '1'],
+//       ['0', '0', '0', '0', '0'],
 // ];
-
-function wrapperGrid(grid) {
-      if (!grid?.length) return [];
-      const n_col = grid[0].length;
-      const row_0 = '0,'
-            .repeat(n_col + 2)
-            .split(',')
-            .filter((v) => !!v);
-      const gridResults = [];
-      gridResults[0] = row_0;
-      for (let i = 0; i < grid.length; i++) {
-            gridResults[i + 1] = [];
-            gridResults[i + 1][0] = '0';
-            for (let j = 0; j < grid[i].length; j++) {
-                  gridResults[i + 1][j + 1] = grid[i][j];
-            }
-            gridResults[i + 1][grid[i].length + 1] = '0';
-      }
-      gridResults.push(row_0);
-      return gridResults;
-}
-
-const gridWrapper = wrapperGrid(grid);
-
-// console.log('gridWrapper: ', gridWrapper);
 
 const LAND_ID = '1',
       WATER_ID = '0';
@@ -93,25 +61,40 @@ const ALL_DIRECTION = {
  * with key => (x,y)
  *    value => [(x1,y1),...(xn,yn)]
  */
+let water_visited = [];
 let circuits = {};
 
-// So the number of island is length of key of circuits dictionary
-var numIslands = function (grid) {
-      if (!grid.length) return 0;
-
-      circuits = {};
+function wrapperGrid(grid) {
+      if (!grid?.length) return [];
+      const n_col = grid[0].length;
+      const row_0 = '0,'
+            .repeat(n_col + 2)
+            .split(',')
+            .filter((v) => !!v);
+      const gridResults = [];
+      // add a row 0 into top of grid result
+      gridResults[0] = row_0;
       for (let i = 0; i < grid.length; i++) {
+            gridResults[i + 1] = [];
+            gridResults[i + 1][0] = '0';
             for (let j = 0; j < grid[i].length; j++) {
-                  if (isSkipPosition(i, j, grid)) {
-                        continue;
-                  }
-                  findCircuit(i, j, grid);
+                  gridResults[i + 1][j + 1] = grid[i][j];
             }
+            gridResults[i + 1][grid[i].length + 1] = '0';
       }
-      return Object.keys(circuits).length;
-};
+      // add a row 0 into bottom of grid result
+      gridResults.push(row_0);
+      return gridResults;
+}
 
-function buildCircuitKey(x, y, grid) {
+function printGrid(grid) {
+      if (!grid?.length) return;
+      for (let r = 0; r < grid.length; r++) {
+            console.log(grid[r] + '\n');
+      }
+}
+
+function buildDictKey(x, y, grid) {
       if (!checkValidPosition(x, y, grid)) return;
       return `(${x},${y})`;
 }
@@ -167,6 +150,17 @@ function isPositionExistOnCircuit(x, y, grid) {
       return false;
 }
 
+function isWaterRegionVisited(x, y) {
+      if (!water_visited?.length) return false;
+      let visited = false;
+      water_visited.forEach((ws) => {
+            if (ws[0] === x && ws[1] === y) {
+                  visited = true;
+            }
+      });
+      return visited;
+}
+
 function isSkipPosition(x, y, grid) {
       const check =
             !checkValidPosition(x, y, grid) ||
@@ -177,9 +171,9 @@ function isSkipPosition(x, y, grid) {
 
 function findCircuit(root_x, root_y, grid) {
       if (!checkValidPosition(root_x, root_y, grid)) return;
-      const keyOfCircuit = buildCircuitKey(root_x, root_y, grid);
+      const keyOfCircuit = buildDictKey(root_x, root_y, grid);
       circuits[keyOfCircuit] = [[root_x, root_y]];
-      console.log(circuits);
+      // console.log(circuits);
       findLandWithDirection(
             keyOfCircuit,
             root_x,
@@ -187,27 +181,6 @@ function findCircuit(root_x, root_y, grid) {
             grid,
             ALL_DIRECTION.TOP
       );
-      // findLandWithDirection(
-      //       keyOfCircuit,
-      //       root_x,
-      //       root_y,
-      //       grid,
-      //       ALL_DIRECTION.BOTTOM
-      // );
-      // findLandWithDirection(
-      //       keyOfCircuit,
-      //       root_x,
-      //       root_y,
-      //       grid,
-      //       ALL_DIRECTION.LEFT
-      // );
-      // findLandWithDirection(
-      //       keyOfCircuit,
-      //       root_x,
-      //       root_y,
-      //       grid,
-      //       ALL_DIRECTION.RIGHT
-      // );
 }
 
 function findLandWithDirection(circuitKey, root_x, root_y, grid, direction) {
@@ -233,15 +206,30 @@ function findLandWithDirection(circuitKey, root_x, root_y, grid, direction) {
 function findLandWithTopDirection(circuitKey, start_x, start_y, grid) {
       if (isStop(start_x, start_y, grid)) return;
       for (let x = start_x - 1; x >= 0; x--) {
-            if (grid[x][start_y] === LAND_ID) {
+            if (
+                  grid[x][start_y] === LAND_ID &&
+                  !isPositionExistOnCircuit(x, start_y, grid)
+            ) {
                   circuits[circuitKey] = [
                         ...(circuits[circuitKey] || []),
                         [x, start_y],
                   ];
             } else {
-                  // console.log('findLandWithTopDirection x: ', x);
-                  findLandWithLeftDiection(circuitKey, x + 1, start_y, grid);
-                  findLandWithRightDirection(circuitKey, x + 1, start_y, grid);
+                  if (!isWaterRegionVisited(x, start_y)) {
+                        water_visited.push([x, start_y]);
+                        findLandWithLeftDiection(
+                              circuitKey,
+                              x + 1,
+                              start_y,
+                              grid
+                        );
+                        findLandWithRightDirection(
+                              circuitKey,
+                              x + 1,
+                              start_y,
+                              grid
+                        );
+                  }
                   break;
             }
       }
@@ -250,15 +238,30 @@ function findLandWithTopDirection(circuitKey, start_x, start_y, grid) {
 function findLandWithBottomDirection(circuitKey, start_x, start_y, grid) {
       if (isStop(start_x, start_y, grid)) return;
       for (let x = start_x + 1; x < grid.length; x++) {
-            if (grid[x][start_y] === LAND_ID) {
+            if (
+                  grid[x][start_y] === LAND_ID &&
+                  !isPositionExistOnCircuit(x, start_y, grid)
+            ) {
                   circuits[circuitKey] = [
                         ...(circuits[circuitKey] || []),
                         [x, start_y],
                   ];
             } else {
-                  console.log('circuits: ', circuits);
-                  findLandWithLeftDiection(circuitKey, x - 1, start_y, grid);
-                  findLandWithRightDirection(circuitKey, x - 1, start_y, grid);
+                  if (!isWaterRegionVisited(x, start_y)) {
+                        water_visited.push([x, start_y]);
+                        findLandWithLeftDiection(
+                              circuitKey,
+                              x - 1,
+                              start_y,
+                              grid
+                        );
+                        findLandWithRightDirection(
+                              circuitKey,
+                              x - 1,
+                              start_y,
+                              grid
+                        );
+                  }
                   break;
             }
       }
@@ -267,15 +270,30 @@ function findLandWithBottomDirection(circuitKey, start_x, start_y, grid) {
 function findLandWithLeftDiection(circuitKey, start_x, start_y, grid) {
       if (isStop(start_x, start_y, grid)) return;
       for (let y = start_y - 1; y >= 0; y--) {
-            if (grid[start_x][y] === LAND_ID) {
+            if (
+                  grid[start_x][y] === LAND_ID &&
+                  !isPositionExistOnCircuit(start_x, y, grid)
+            ) {
                   circuits[circuitKey] = [
                         ...(circuits[circuitKey] || []),
                         [start_x, y],
                   ];
             } else {
-                  console.log('findLandWithLeftDiection y: ', y);
-                  findLandWithTopDirection(circuitKey, start_x, y + 1, grid);
-                  findLandWithBottomDirection(circuitKey, start_x, y + 1, grid);
+                  if (!isWaterRegionVisited(start_x, y)) {
+                        water_visited.push([start_x, y]);
+                        findLandWithTopDirection(
+                              circuitKey,
+                              start_x,
+                              y + 1,
+                              grid
+                        );
+                        findLandWithBottomDirection(
+                              circuitKey,
+                              start_x,
+                              y + 1,
+                              grid
+                        );
+                  }
                   break;
             }
       }
@@ -284,14 +302,30 @@ function findLandWithLeftDiection(circuitKey, start_x, start_y, grid) {
 function findLandWithRightDirection(circuitKey, start_x, start_y, grid) {
       if (isStop(start_x, start_y, grid)) return;
       for (let y = start_y + 1; y < grid[start_x].length; y++) {
-            if (grid[start_x][y] === LAND_ID) {
+            if (
+                  grid[start_x][y] === LAND_ID &&
+                  !isPositionExistOnCircuit(start_x, y, grid)
+            ) {
                   circuits[circuitKey] = [
                         ...(circuits[circuitKey] || []),
                         [start_x, y],
                   ];
             } else {
-                  findLandWithTopDirection(circuitKey, start_x, y - 1, grid);
-                  findLandWithBottomDirection(circuitKey, start_x, y - 1, grid);
+                  if (!isWaterRegionVisited(start_x, y)) {
+                        water_visited.push([start_x, y]);
+                        findLandWithTopDirection(
+                              circuitKey,
+                              start_x,
+                              y - 1,
+                              grid
+                        );
+                        findLandWithBottomDirection(
+                              circuitKey,
+                              start_x,
+                              y - 1,
+                              grid
+                        );
+                  }
                   break;
             }
       }
@@ -322,10 +356,31 @@ function isStopMoveWithDirection(x, y, grid, direction) {
       }
 }
 
-console.log('grid: ', gridWrapper);
+// So the number of island is length of key of circuits dictionary
+var numIslands = function (grid) {
+      if (!grid.length) return 0;
+      water_visited = [];
+      circuits = {};
+      const gridWrapper = wrapperGrid(grid);
+      printGrid(gridWrapper);
+      for (let i = 0; i < gridWrapper.length; i++) {
+            for (let j = 0; j < gridWrapper[i].length; j++) {
+                  if (isSkipPosition(i, j, gridWrapper)) {
+                        continue;
+                  }
+                  findCircuit(i, j, gridWrapper);
+            }
+      }
+      return Object.keys(circuits).length;
+};
 
-const numberOfIslands = numIslands(gridWrapper);
+const grid = [
+      ['1', '1', '1'],
+      ['0', '1', '0'],
+      ['0', '1', '0'],
+];
 
-console.log('All circuits: ', circuits);
+const numberOfIslands = numIslands(grid);
 
+console.log('circuits: ', circuits);
 console.log('numberOfIslands: ', numberOfIslands);
