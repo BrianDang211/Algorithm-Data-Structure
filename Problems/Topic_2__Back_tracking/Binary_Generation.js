@@ -1,4 +1,4 @@
-const { validateParameters } = require("../../Utils/Validates");
+const { utils } = require("../../Utils/Utils");
  
 /**
  * Input: Binary Length request: Integer number => n (n > 0)
@@ -20,7 +20,7 @@ const { validateParameters } = require("../../Utils/Validates");
  * => Total elements = 2^n
  */
 function binaryGeneration(n) {
-      validateParameters(n);
+      utils.validateParameters(n);
       return backTrackingProgramming(n);
 }
 

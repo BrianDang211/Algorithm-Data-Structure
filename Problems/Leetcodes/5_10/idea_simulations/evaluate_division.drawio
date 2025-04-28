@@ -1,0 +1,44 @@
+<mxfile host="Electron" modified="2025-03-04T10:14:51.929Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.1.0 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="gNAJPnChesu5lJnH2QrV" version="24.1.0" type="device">
+  <diagram name="Page-1" id="SE0Pd3vN2Rl-mlT4ESwE">
+    <mxGraphModel dx="1900" dy="621" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="UxKhiTpBqrd-aujqjKo_-1" value="Input:&lt;br&gt;- Give an array of variable pairs equations&lt;div&gt;and an array of real numbers values&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;+ An array of variable pairs equations&lt;/div&gt;&lt;div&gt;+ An array of real numbers values&lt;/div&gt;&lt;div&gt;+ An array of variable pairs queries&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="40" y="120" width="250" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="UxKhiTpBqrd-aujqjKo_-2" value="Ouput:&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;From array of variable pairs queries&amp;nbsp;&lt;/div&gt;&lt;div&gt;return an array of real number.&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="480" y="120" width="250" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="UxKhiTpBqrd-aujqjKo_-3" value="" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="UxKhiTpBqrd-aujqjKo_-1" target="UxKhiTpBqrd-aujqjKo_-2" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="400" y="350" as="sourcePoint" />
+            <mxPoint x="450" y="300" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="SEo9ATav03enL17kAKzb-3" value="" style="endArrow=classic;html=1;rounded=0;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="100" y="280" as="sourcePoint" />
+            <mxPoint x="370" y="280" as="targetPoint" />
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="SEo9ATav03enL17kAKzb-4" value="Input" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="70" y="240" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="SEo9ATav03enL17kAKzb-5" value="Ouput" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="365" y="228" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="SEo9ATav03enL17kAKzb-12" value="&lt;div&gt;Return the answers to all queries???&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="370" y="270" width="420" height="230" as="geometry" />
+        </mxCell>
+        <mxCell id="fv41nSOZQW13nvUXwlYE-1" value="- equations = [[&quot;a&quot;,&quot;b&quot;],[&quot;b&quot;,&quot;c&quot;]]&lt;div&gt;- values = [2.0,3.0]&lt;/div&gt;&lt;div&gt;- queries = [[&quot;a&quot;,&quot;c&quot;],[&quot;b&quot;,&quot;a&quot;],[&quot;a&quot;,&quot;e&quot;],[&quot;a&quot;,&quot;a&quot;],[&quot;x&quot;,&quot;x&quot;]]&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=top;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="-145" y="263" width="300" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="fv41nSOZQW13nvUXwlYE-2" value="&lt;div&gt;Return the answers to all queries???&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="370" y="270" width="420" height="230" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

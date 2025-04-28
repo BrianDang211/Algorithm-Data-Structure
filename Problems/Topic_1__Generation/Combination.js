@@ -1,5 +1,5 @@
-const { autogenerateArrNumber } = require("../../Utils/GenerateNumber");
-const { validateParameters } = require("../../Utils/Validates");
+const { utils } = require("../../Utils/Utils");
+
 function combination(n , k, autoGenArrSourceConfig) {
       /**
        * Input:
@@ -27,12 +27,12 @@ function combination(n , k, autoGenArrSourceConfig) {
        * + Int: 1 | 4 byte
        * + String: 1 byte
       */
-      validateParameters(n, k);
+      utils.validateParameters(n, k);
       if (k > n) {
             throw Error("Number k must be least or equal than n");
       };
       const { startValue = 1, rangeStep = 1 } = autoGenArrSourceConfig || {};
-      const numArr = autogenerateArrNumber(startValue, rangeStep, n); // n*4 (bytes)
+      const numArr = utils.autogenerateArrNumber(startValue, rangeStep, n); // n*4 (bytes)
       const results = []; // array => [[1,2,3], [1,2,4], [1,2,5], ...]
       const FIRST_ELEMENT_MAX = numArr[n-k]; // 4 byte
       const MAX_VALUE = numArr[numArr.length - 1]; // 4 byte
@@ -43,9 +43,9 @@ function combination(n , k, autoGenArrSourceConfig) {
       while (lastConfig[0] === undefined || Number(lastConfig[0]) < FIRST_ELEMENT_MAX) {
             // generate start_element of each generation
             if (!results?.length) {
-                  results.push(autogenerateArrNumber(startValue, rangeStep, k));
+                  results.push(utils.autogenerateArrNumber(startValue, rangeStep, k));
             } else if (nextGenerateControl) {
-                  results.push(autogenerateArrNumber(lastConfig[0] + 1, rangeStep, k));
+                  results.push(utils.autogenerateArrNumber(lastConfig[0] + 1, rangeStep, k));
                   // reset next generate control
                   nextGenerateControl = false;
             } else {
@@ -56,7 +56,7 @@ function combination(n , k, autoGenArrSourceConfig) {
                               } else {
                                     let nextConfig = [...lastConfig.slice(0, i), lastConfig[i] + 1];
                                     if (nextConfig.length < k) {
-                                          const restOfNextConfig = autogenerateArrNumber(nextConfig[nextConfig.length-1] + 1, rangeStep, k-nextConfig.length); 
+                                          const restOfNextConfig = utils.autogenerateArrNumber(nextConfig[nextConfig.length-1] + 1, rangeStep, k-nextConfig.length); 
                                           nextConfig = [...nextConfig, ...restOfNextConfig];
                                     }
                                     results.push(nextConfig);

@@ -56,6 +56,8 @@ const ALL_DIRECTION = {
       RIGHT: 4,
 };
 
+const PATH_SPLIT = '->';
+
 /**
  * A dictionary which store all circuits exist on grid,
  * with key => (x,y)
@@ -153,8 +155,8 @@ function isPositionExistOnCircuit(x, y, grid) {
 function isWaterRegionVisited(x, y) {
       if (!water_visited?.length) return false;
       let visited = false;
-      water_visited.forEach((ws) => {
-            if (ws[0] === x && ws[1] === y) {
+      water_visited.forEach((wv) => {
+            if (wv[0] === x && wv[1] === y) {
                   visited = true;
             }
       });
@@ -205,6 +207,7 @@ function findLandWithDirection(circuitKey, root_x, root_y, grid, direction) {
 
 function findLandWithTopDirection(circuitKey, start_x, start_y, grid) {
       if (isStop(start_x, start_y, grid)) return;
+      const listPositionOfLeftAndRight = [];
       for (let x = start_x - 1; x >= 0; x--) {
             if (
                   grid[x][start_y] === LAND_ID &&
@@ -214,21 +217,30 @@ function findLandWithTopDirection(circuitKey, start_x, start_y, grid) {
                         ...(circuits[circuitKey] || []),
                         [x, start_y],
                   ];
+                  if (
+                        checkValidPosition(x - 1, start_y, grid) &&
+                        grid[x - 1][start_y] === LAND_ID
+                  ) {
+                        listPositionOfLeftAndRight.push([x, start_y]);
+                  }
             } else {
                   if (!isWaterRegionVisited(x, start_y)) {
                         water_visited.push([x, start_y]);
-                        findLandWithLeftDiection(
-                              circuitKey,
-                              x + 1,
-                              start_y,
-                              grid
-                        );
-                        findLandWithRightDirection(
-                              circuitKey,
-                              x + 1,
-                              start_y,
-                              grid
-                        );
+                        listPositionOfLeftAndRight.push([x + 1, start_y]);
+                        listPositionOfLeftAndRight.forEach((coor) => {
+                              findLandWithLeftDiection(
+                                    circuitKey,
+                                    coor[0],
+                                    coor[1],
+                                    grid
+                              );
+                              findLandWithRightDirection(
+                                    circuitKey,
+                                    coor[0],
+                                    coor[1],
+                                    grid
+                              );
+                        });
                   }
                   break;
             }
@@ -237,6 +249,10 @@ function findLandWithTopDirection(circuitKey, start_x, start_y, grid) {
 
 function findLandWithBottomDirection(circuitKey, start_x, start_y, grid) {
       if (isStop(start_x, start_y, grid)) return;
+      const listPositionOfLeftAndRight = [];
+      if (start_x === 1 && start_y === 5) {
+            console.log('hihi go .... ');
+      }
       for (let x = start_x + 1; x < grid.length; x++) {
             if (
                   grid[x][start_y] === LAND_ID &&
@@ -246,21 +262,54 @@ function findLandWithBottomDirection(circuitKey, start_x, start_y, grid) {
                         ...(circuits[circuitKey] || []),
                         [x, start_y],
                   ];
+                  if (x === 2 && start_y === 5) {
+                        console.log('Loging....');
+                  }
+                  if (
+                        checkValidPosition(x + 1, start_y, grid) &&
+                        grid[x + 1][start_y] === LAND_ID
+                  ) {
+                        listPositionOfLeftAndRight.push([x, start_y]);
+                  }
             } else {
+                  if (start_x === 1 && start_y === 5) {
+                        console.log('=======================');
+                        console.log('x: ', x);
+                        console.log('start_y', start_y);
+                        console.log('water: ', water_visited);
+                        console.log('=======================');
+                  }
                   if (!isWaterRegionVisited(x, start_y)) {
+                        if (start_x === 1 && start_y === 5) {
+                              console.log('x: ', x);
+                              console.log('start_y: ', start_y);
+                              console.log(
+                                    'listPositionOfLeftAndRight === : ',
+                                    listPositionOfLeftAndRight
+                              );
+                        }
                         water_visited.push([x, start_y]);
-                        findLandWithLeftDiection(
-                              circuitKey,
-                              x - 1,
-                              start_y,
-                              grid
-                        );
-                        findLandWithRightDirection(
-                              circuitKey,
-                              x - 1,
-                              start_y,
-                              grid
-                        );
+                        listPositionOfLeftAndRight.push([x - 1, start_y]);
+                        if (start_x === 1 && start_y === 5) {
+                              console.log(
+                                    'listPositionOfLeftAndRight: ',
+                                    listPositionOfLeftAndRight
+                              );
+                        }
+                        listPositionOfLeftAndRight.forEach((coor) => {
+                              findLandWithLeftDiection(
+                                    circuitKey,
+                                    coor[0],
+                                    coor[1],
+                                    grid
+                              );
+                              findLandWithRightDirection(
+                                    circuitKey,
+                                    coor[0],
+                                    coor[1],
+                                    grid
+                              );
+                        });
                   }
                   break;
             }
@@ -269,6 +318,7 @@ function findLandWithBottomDirection(circuitKey, start_x, start_y, grid) {
 
 function findLandWithLeftDiection(circuitKey, start_x, start_y, grid) {
       if (isStop(start_x, start_y, grid)) return;
+      const listPositionOfTopAndBottom = [];
       for (let y = start_y - 1; y >= 0; y--) {
             if (
                   grid[start_x][y] === LAND_ID &&
@@ -278,21 +328,30 @@ function findLandWithLeftDiection(circuitKey, start_x, start_y, grid) {
                         ...(circuits[circuitKey] || []),
                         [start_x, y],
                   ];
+                  if (
+                        checkValidPosition(start_x, y - 1, grid) &&
+                        grid[(start_x, y - 1)] === LAND_ID
+                  ) {
+                        listPositionOfTopAndBottom.push([start_x, y]);
+                  }
             } else {
                   if (!isWaterRegionVisited(start_x, y)) {
                         water_visited.push([start_x, y]);
-                        findLandWithTopDirection(
-                              circuitKey,
-                              start_x,
-                              y + 1,
-                              grid
-                        );
-                        findLandWithBottomDirection(
-                              circuitKey,
-                              start_x,
-                              y + 1,
-                              grid
-                        );
+                        listPositionOfTopAndBottom.push([start_x, y + 1]);
+                        listPositionOfTopAndBottom.forEach((coor) => {
+                              findLandWithTopDirection(
+                                    circuitKey,
+                                    coor[0],
+                                    coor[1],
+                                    grid
+                              );
+                              findLandWithBottomDirection(
+                                    circuitKey,
+                                    coor[0],
+                                    coor[1],
+                                    grid
+                              );
+                        });
                   }
                   break;
             }
@@ -301,6 +360,7 @@ function findLandWithLeftDiection(circuitKey, start_x, start_y, grid) {
 
 function findLandWithRightDirection(circuitKey, start_x, start_y, grid) {
       if (isStop(start_x, start_y, grid)) return;
+      const listPositionOfTopAndBottom = [];
       for (let y = start_y + 1; y < grid[start_x].length; y++) {
             if (
                   grid[start_x][y] === LAND_ID &&
@@ -310,21 +370,30 @@ function findLandWithRightDirection(circuitKey, start_x, start_y, grid) {
                         ...(circuits[circuitKey] || []),
                         [start_x, y],
                   ];
+                  if (
+                        checkValidPosition(start_x, y + 1, grid) &&
+                        grid[start_x][y + 1] === LAND_ID
+                  ) {
+                        listPositionOfTopAndBottom.push([start_x, y]);
+                  }
             } else {
                   if (!isWaterRegionVisited(start_x, y)) {
                         water_visited.push([start_x, y]);
-                        findLandWithTopDirection(
-                              circuitKey,
-                              start_x,
-                              y - 1,
-                              grid
-                        );
-                        findLandWithBottomDirection(
-                              circuitKey,
-                              start_x,
-                              y - 1,
-                              grid
-                        );
+                        listPositionOfTopAndBottom.push([start_x, y - 1]);
+                        listPositionOfTopAndBottom.forEach((coor) => {
+                              findLandWithTopDirection(
+                                    circuitKey,
+                                    coor[0],
+                                    coor[1],
+                                    grid
+                              );
+                              findLandWithBottomDirection(
+                                    circuitKey,
+                                    coor[0],
+                                    coor[1],
+                                    grid
+                              );
+                        });
                   }
                   break;
             }
@@ -375,9 +444,16 @@ var numIslands = function (grid) {
 };
 
 const grid = [
-      ['1', '1', '1'],
-      ['0', '1', '0'],
-      ['0', '1', '0'],
+      ['1', '1', '1', '1', '1', '0', '1', '1', '1', '1'],
+      ['1', '0', '1', '0', '1', '1', '1', '1', '1', '1'],
+      ['0', '1', '1', '1', '0', '1', '1', '1', '1', '1'],
+      ['1', '1', '0', '1', '1', '0', '0', '0', '0', '1'],
+      ['1', '0', '1', '0', '1', '0', '0', '1', '0', '1'],
+      ['1', '0', '0', '1', '1', '1', '0', '1', '0', '0'],
+      ['0', '0', '1', '0', '0', '1', '1', '1', '1', '0'],
+      ['1', '0', '1', '1', '1', '0', '0', '1', '1', '1'],
+      ['1', '1', '1', '1', '1', '1', '1', '1', '0', '1'],
+      ['1', '0', '1', '1', '1', '1', '1', '1', '1', '0'],
 ];
 
 const numberOfIslands = numIslands(grid);

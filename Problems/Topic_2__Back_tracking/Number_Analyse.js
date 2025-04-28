@@ -1,5 +1,4 @@
-const { validateParameters } = require("../../Utils/Validates");
-const { autogenerateArrNumber } = require("../../Utils/GenerateNumber")
+const { utils } = require("../../Utils/Utils");
 /**
  * Input: n E Z+ (n >= 1)
  * Ouput: List all collection where sum all elements inside collection equal n
@@ -34,7 +33,7 @@ const { autogenerateArrNumber } = require("../../Utils/GenerateNumber")
  * @param {*} n 
  */
 function numberAnalyse(n) {
-      validateParameters(n);
+      utils.validateParameters(n);
       return backTrackingProgramming(n);
 }
 
@@ -57,7 +56,7 @@ function numberAnalyse(n) {
  */
 function backTrackingProgramming(n) {
       let results = [];
-      const rangeValue = autogenerateArrNumber(1,1,n);
+      const rangeValue = utils.autogenerateArrNumber(1,1,n);
       rangeValue.forEach(i => {
             if (i < n) {
                   const subElements = backTrackingProgramming(n - i);

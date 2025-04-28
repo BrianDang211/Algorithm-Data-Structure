@@ -38,15 +38,15 @@
    ]
  */
 
-const { autogenerateArrNumber } = require("../../Utils/GenerateNumber");
+const { utils } = require("../../Utils/Utils");
 
 // Expand our problem with number of rods passed to function like as a argument
 // condition: Number of disks always less of equal than number of rods.
 const NUMBER_OF_RODS = 3;
 const NUMBER_OF_DISKS = 3;
 
-const arrayRodIds = autogenerateArrNumber(1,1,NUMBER_OF_RODS);
-const arrayDiskIds = autogenerateArrNumber(1,1,NUMBER_OF_DISKS);
+const arrayRodIds = utils.autogenerateArrNumber(1,1,NUMBER_OF_RODS);
+const arrayDiskIds = utils.autogenerateArrNumber(1,1,NUMBER_OF_DISKS);
 
 /**
  * Idea:

@@ -1,5 +1,4 @@
-const { validateParameters } = require("../../Utils/Validates");
-const { autogenerateArrNumber } = require("../../Utils/GenerateNumber");
+const { utils } = require("../../Utils/Utils");
 /**
  * Input: n,k E Z+
  * Ouput: All collections length = k, with element value E {1,n}
@@ -37,7 +36,7 @@ const { autogenerateArrNumber } = require("../../Utils/GenerateNumber");
  * @param {*} n 
  */
 function permutationKofN(n,k) {
-      validateParameters(n,k);
+      utils.validateParameters(n,k);
       return backTrackingProgramming(n,k, 1);
 }
 
@@ -52,10 +51,10 @@ function backTrackingProgramming(n,k,position,initValue=1) {
       const sizeOfRange = maxValueOfCurrentPosition - initValue + 1;
       // set up base case
       if (position === k) {
-            return autogenerateArrNumber(initValue, 1, sizeOfRange).map(elm => [elm]);
+            return utils.autogenerateArrNumber(initValue, 1, sizeOfRange).map(elm => [elm]);
       }
       let results = [];
-      const rangeValueAvaiableForCurrentPosition = autogenerateArrNumber(initValue, 1, sizeOfRange);
+      const rangeValueAvaiableForCurrentPosition = utils.autogenerateArrNumber(initValue, 1, sizeOfRange);
       rangeValueAvaiableForCurrentPosition.forEach(v => {
             // back tracking search for all next position then merge to results
             const collectionOfNextPostion = backTrackingProgramming(

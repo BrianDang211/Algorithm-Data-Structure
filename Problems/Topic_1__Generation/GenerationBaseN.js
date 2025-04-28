@@ -1,8 +1,5 @@
 const { permutation } = require("./Permutation");
-const { validateParameters } = require("../../Utils/Validates");
-const { autogenerateArrNumber } = require("../../Utils/GenerateNumber");
-const { convertRepeatElementToArray } = require("../../Utils/Converter");
-const { writeFile } = require("../../Utils/WriteFile");
+const { utils } = require("../../Utils/Utils");
 const { combination } = require("./Combination");
 
 /**
@@ -30,7 +27,7 @@ const { combination } = require("./Combination");
  */
   
 function generationBaseN(n,k,arrayAutogenConfig={startValue: 0, rangeStep: 1}) {
-      validateParameters(n, k);
+      utils.validateParameters(n, k);
       let results = [];
       let i = 1;
       while(i <= n && i <= k) {
@@ -57,9 +54,9 @@ function generationBaseN(n,k,arrayAutogenConfig={startValue: 0, rangeStep: 1}) {
  * @returns  
  */
 function autoGeneratePrograming(k, arrSource) {
-      validateParameters(k, arrSource); 
+      utils.validateParameters(k, arrSource); 
       if (arrSource.length > k) return [];   
-      if (arrSource.length === 1) return [convertRepeatElementToArray(String(arrSource[0]), k)];
+      if (arrSource.length === 1) return [utils.convertRepeatElementToArray(String(arrSource[0]), k)];
       if (arrSource.length === k) {
             return permutation(-1, arrSource); 
       }; 
@@ -93,7 +90,7 @@ function autoGeneratePrograming(k, arrSource) {
  * Array Source is a number array was sorted
  */
 function binaryGeneratePrograming(k, arrSource) {
-      validateParameters(k, arrSource);
+      utils.validateParameters(k, arrSource);
       if (arrSource?.length !== 2) {
             throw Error("Binary generation must be array source length is 2");
       }
@@ -101,9 +98,9 @@ function binaryGeneratePrograming(k, arrSource) {
             return [[0],[1]];
       }
       // init results with MINIMUM config
-      let results = [[...convertRepeatElementToArray(String(arrSource[0]), k-1), arrSource[1]]];
+      let results = [[...utils.convertRepeatElementToArray(String(arrSource[0]), k-1), arrSource[1]]];
       let lastConfigOfResults = results[results.length - 1];
-      const MAXIMUM_CONFIG = [...convertRepeatElementToArray(String(arrSource[1]),k-1), arrSource[0]];
+      const MAXIMUM_CONFIG = [...utils.convertRepeatElementToArray(String(arrSource[1]),k-1), arrSource[0]];
       // compare lastConfigOfResult with MAXIMUM_CONFIG
       while (lastConfigOfResults.join("") !== MAXIMUM_CONFIG.join("")) {
             for (let i = lastConfigOfResults.length - 1; i >= 0; i--) {
@@ -112,7 +109,7 @@ function binaryGeneratePrograming(k, arrSource) {
                         nextConfig = [...lastConfigOfResults.slice(0, i), arrSource[1]];
                         // set all element after position i tobe MINIMUM_VALUE of array source.
                         if (i < lastConfigOfResults.length - 1) {
-                              nextConfig = [...nextConfig, ...convertRepeatElementToArray(String(arrSource[0]),k - nextConfig.length)];
+                              nextConfig = [...nextConfig, ...utils.convertRepeatElementToArray(String(arrSource[0]),k - nextConfig.length)];
                         };
                         results.push(nextConfig);
                         break;
@@ -124,8 +121,6 @@ function binaryGeneratePrograming(k, arrSource) {
 }
 
 const results = generationBaseN(3,4);
-//log
-// writeFile("GenerationBaseNOutput.txt", results);
 console.log("results === ", results);
 // console.log("results === ", results.length);
 module.exports = { generationBaseN, binaryGeneratePrograming , autoGeneratePrograming}

@@ -39,7 +39,7 @@
  * @param {*} position 
  */ 
 
-const { validateParameters } = require("../../Utils/Validates");
+const { utils } = require("../../Utils/Utils");
 const { writeFile } = require("../../Utils/WriteFile");
 const { binaryGeneratePrograming, generationBaseN } = require("./GenerationBaseN");
 
@@ -66,7 +66,7 @@ const FORMATER = {
 const BINARY_ARRAY = [0,1];
 
 function solution(n) {
-      validateParameters(n);
+      utils.validateParameters(n);
       if (n < 4) {
             throw Error("Number n must be greater or equal 4");
       };
@@ -86,7 +86,7 @@ function filterResultFromBinaryGenerate(binaryGenerateArr) {
 }
 
 function generateWithPosition(position, nRestPositionToAllocate) {
-      validateParameters(nRestPositionToAllocate);
+      utils.validateParameters(nRestPositionToAllocate);
       const getRestOfResultWithPosition = () => {
             const vv = binaryGeneratePrograming(nRestPositionToAllocate, BINARY_ARRAY);
             return filterResultFromBinaryGenerate(vv).map(element => {
@@ -130,7 +130,7 @@ function generateWithPosition(position, nRestPositionToAllocate) {
 }
 
 function mixedGenerate(position, nRestPositionToAllocate) {
-      validateParameters(nRestPositionToAllocate);
+      utils.validateParameters(nRestPositionToAllocate);
       let results = [];
       for(let i = 1; i < nRestPositionToAllocate; i++) {
             const restResults = binaryGeneratePrograming(i, BINARY_ARRAY);

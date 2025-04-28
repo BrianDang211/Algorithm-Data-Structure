@@ -14,7 +14,7 @@
 // Computer Science -> Graph
 // Computer Programming -> Array 
 
-const { autogenerateArrNumber } = require("../../Utils/GenerateNumber");
+const { utils } = require("../../Utils/Utils");
 
 const testCases = [
       {
@@ -198,7 +198,7 @@ function main(m,n,matrixWeight) {
             },0);
       };
 
-      const citiesData = autogenerateArrNumber(1,1,n).map(i => {
+      const citiesData = utils.autogenerateArrNumber(1,1,n).map(i => {
             return {id: i, visited: false};
       });
 

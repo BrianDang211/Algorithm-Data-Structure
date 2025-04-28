@@ -35,13 +35,13 @@
  * - Time Complex: E = O(n + n!)
  * - Space Complex: E = O()
  */
-const { autogenerateArrNumber } = require("../../Utils/GenerateNumber");
+const { utils } = require("../../Utils/Utils");
 
 function permutation(n, arrSource) {
       let results = []; 
       if (n <= 0 && !arrSource?.length) return results;
       if (n === 1) return arrSource?.length ? arrSource : (results.push(1) && results);
-      const arrNumber = arrSource?.length ? arrSource : autogenerateArrNumber(1, 1, n); // t = O(n) // s = n*4 (Byte) 
+      const arrNumber = arrSource?.length ? arrSource : utils.autogenerateArrNumber(1, 1, n); // t = O(n) // s = n*4 (Byte) 
       // O(n*(n-1)*(n-2)*...2.1) = O(n!)
       // O(n*(n-1)*(n-2)*...2.1) = O(n!)
       // S = n*n*4 + n!*4*4

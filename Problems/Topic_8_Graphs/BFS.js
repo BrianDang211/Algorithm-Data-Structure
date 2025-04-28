@@ -10,8 +10,6 @@
  *
  */
 
-const { logger } = require('../../Utils/Utils');
-
 class BFS {
       queue = [];
       traves = {};
@@ -61,7 +59,6 @@ class BFS {
 
       setMatrix() {
             if (!this.dictEdge || !Object.keys(this.dictEdge).length) return;
-            // logger.info('number of vertice: ' + this.nVertice);
             for (let i = 0; i < this.nVertice; i++) {
                   this.matrix[i] = [];
                   const dictEdgeOfVerticeI = this.dictEdge[i + 1];
@@ -73,7 +70,6 @@ class BFS {
                               : 0;
                   }
             }
-            // logger.info(this.matrix);
       }
 
       handlePathNotFoundException(from, to) {

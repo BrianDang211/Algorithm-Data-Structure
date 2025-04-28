@@ -79,7 +79,6 @@
  * Space complexity:
  * S(n) = It's dependency on the data type of parameters and variables inside DFS function.
  */
-const { logger } = require('../../Utils/Utils');
 const { GRAPH_DATA_STATUS } = require('./constants/index');
 
 class DFS {
@@ -137,7 +136,6 @@ class DFS {
 
       setMatrix() {
             if (!this.dictEdge || !Object.keys(this.dictEdge).length) return;
-            // logger.info("number of vertice: " + this.nVertice);
             for (let i = 0; i < this.nVertice; i++) {
                   this.matrix[i] = [];
                   const dictEdgeOfVerticeI = this.dictEdge[i + 1];
@@ -149,7 +147,6 @@ class DFS {
                               : 0;
                   }
             }
-            // logger.info(this.matrix);
       }
 
       handleVerticeNotFoundException(v) {
